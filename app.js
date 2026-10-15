@@ -89,7 +89,7 @@
   function showSlide(n) {
     current = Math.min(40, Math.max(1, n));
     const num = String(current).padStart(2, "0");
-    $("#slideImg").src = `slides/slide-${num}.jpg`;
+    $("#slideImg").src = `slide-${num}.jpg`;
     $("#slideImg").alt = `Slide ${current}: ${A.slides[current - 1].title}`;
     $("#slideCount").textContent = `${current} / 40`;
     $("#slideRange").value = current;
