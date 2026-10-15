@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unit 4 · Planning a Trip</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="top-row">
+      <div class="brand">Aslan <span>10º</span> · Unit 4 · Planning a Trip</div>
+      <div class="scoreboard" id="scoreboard" aria-label="Placar das equipes"></div>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button data-tab="slides" class="active" role="tab">Slides</button>
+      <button data-tab="quiz" role="tab">Quiz</button>
+      <button data-tab="fill" role="tab">Completar</button>
+      <button data-tab="missao" role="tab">Missões</button>
+      <button data-tab="speak" role="tab">Speaking</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- SLIDES -->
+    <section id="tab-slides" class="tab active">
+      <div class="viewer">
+        <button class="nav" id="prev" aria-label="Slide anterior">‹</button>
+        <img id="slideImg" alt="Slide da aula">
+        <button class="nav" id="next" aria-label="Próximo slide">›</button>
+      </div>
+      <div class="toolbar">
+        <span id="slideCount"></span>
+        <input type="range" id="slideRange" min="1" max="40" value="1" aria-label="Ir para o slide">
+        <button id="fullscreenBtn">Tela cheia</button>
+      </div>
+      <p class="hint">Setas ← → para navegar · F para tela cheia</p>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="tab-quiz" class="tab">
+      <div class="card" id="quizCard"></div>
+    </section>
+
+    <!-- COMPLETAR -->
+    <section id="tab-fill" class="tab">
+      <div id="fillArea"></div>
+    </section>
+
+    <!-- MISSÕES -->
+    <section id="tab-missao" class="tab">
+      <div class="mission-switch" id="missionSwitch"></div>
+      <div class="tiles" id="tiles"></div>
+      <div class="card task" id="taskCard" hidden>
+        <p class="task-prompt" id="taskPrompt"></p>
+        <div class="timer" id="taskTimer">30</div>
+        <div class="row">
+          <button id="startTask">Iniciar 30s</button>
+          <button id="closeTask" class="ghost">Fechar</button>
+        </div>
+        <div class="row award" id="awardRow" hidden>
+          <span>Ponto para:</span>
+          <div id="awardButtons"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPEAKING -->
+    <section id="tab-speak" class="tab">
+      <div class="card" id="speakCard"></div>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
