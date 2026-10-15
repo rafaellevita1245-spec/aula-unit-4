@@ -82,42 +82,26 @@
     } catch (e) { /* sem som */ }
   }
 
-  // ---------- Slides ----------
-  let current = store.get("unit4-slide", 1);
-  if (!(current >= 1 && current <= 40)) current = 1;
-
-  function showSlide(n) {
-    current = Math.min(40, Math.max(1, n));
-    const num = String(current).padStart(2, "0");
-    $("#slideImg").src = `slide-${num}.jpg`;
-    $("#slideImg").alt = `Slide ${current}: ${A.slides[current - 1].title}`;
-    $("#slideCount").textContent = `${current} / 40`;
-    $("#slideRange").value = current;
-    store.set("unit4-slide", current);
+  // ---------- Slides (todos empilhados, rolagem contínua) ----------
+  function renderSlides() {
+    const box = $("#pages");
+    A.slides.forEach((s) => {
+      const num = String(s.n).padStart(2, "0");
+      const fig = el("figure", "page");
+      fig.id = "slide-" + s.n;
+      const img = el("img");
+      img.src = `slide-${num}.jpg`;
+      img.alt = `Slide ${s.n}: ${s.title}`;
+      img.loading = "lazy";
+      fig.appendChild(img);
+      fig.appendChild(el("figcaption", null, `${s.n} / 40 · ${s.title}`));
+      box.appendChild(fig);
+    });
   }
 
-  $("#prev").addEventListener("click", () => showSlide(current - 1));
-  $("#next").addEventListener("click", () => showSlide(current + 1));
-  $("#slideRange").addEventListener("input", (e) => showSlide(Number(e.target.value)));
-
-  document.addEventListener("keydown", (e) => {
-    if (e.target.matches("input, select, textarea")) return;
-    const slidesVisible = $("#tab-slides").classList.contains("active");
-    if (e.key === "ArrowRight" && slidesVisible) showSlide(current + 1);
-    if (e.key === "ArrowLeft" && slidesVisible) showSlide(current - 1);
-    if (e.key === "f" || e.key === "F") toggleFullscreen();
-  });
-
-  function toggleFullscreen() {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
-    } else {
-      document.exitFullscreen && document.exitFullscreen();
-    }
-  }
-  $("#fullscreenBtn").addEventListener("click", toggleFullscreen);
-  document.addEventListener("fullscreenchange", () => {
-    document.body.classList.toggle("presenting", !!document.fullscreenElement);
+  $("#topBtn").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+  window.addEventListener("scroll", () => {
+    $("#topBtn").hidden = window.scrollY < 600;
   });
 
   // ---------- Abas ----------
@@ -499,7 +483,7 @@
 
   // ---------- Inicialização ----------
   renderScoreboard();
-  showSlide(current);
+  renderSlides();
   startQuiz();
   renderFill();
   renderMissionSwitch();

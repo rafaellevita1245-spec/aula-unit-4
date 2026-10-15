@@ -24,17 +24,8 @@
   <main>
     <!-- SLIDES -->
     <section id="tab-slides" class="tab active">
-      <div class="viewer">
-        <button class="nav" id="prev" aria-label="Slide anterior">‹</button>
-        <img id="slideImg" alt="Slide da aula">
-        <button class="nav" id="next" aria-label="Próximo slide">›</button>
-      </div>
-      <div class="toolbar">
-        <span id="slideCount"></span>
-        <input type="range" id="slideRange" min="1" max="40" value="1" aria-label="Ir para o slide">
-        <button id="fullscreenBtn">Tela cheia</button>
-      </div>
-      <p class="hint">Setas ← → para navegar · F para tela cheia</p>
+      <div id="pages" class="pages"></div>
+      <button id="topBtn" class="to-top" hidden>↑ Topo</button>
     </section>
 
     <!-- QUIZ -->

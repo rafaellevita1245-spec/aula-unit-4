@@ -128,23 +128,30 @@ main { padding: 16px; max-width: 1100px; margin: 0 auto; }
   align-items: center;
   gap: 8px;
 }
-.viewer img {
+/* Todos os slides numa coluna só, como um PDF longo */
+.pages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.page { margin: 0; width: 100%; max-width: 1000px; }
+.page img {
+  display: block;
   width: 100%;
-  border-radius: var(--radius);
+  height: auto;
+  border-radius: 8px;
   box-shadow: 0 4px 18px rgba(0, 0, 0, .18);
   background: #000;
 }
-.nav { font-size: 32px; padding: 0 16px; min-height: 80px; }
-.toolbar {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: 14px 0 4px;
+.page figcaption { color: var(--muted); font-size: 13px; text-align: center; margin-top: 4px; }
+.to-top {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 20;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .25);
 }
-.toolbar input[type="range"] { width: min(360px, 60vw); }
-#slideCount { font-weight: 700; min-width: 80px; text-align: center; }
 
 /* ---------- Quiz ---------- */
 .quiz-q { font-size: 22px; font-weight: 700; margin: 4px 0 16px; }
