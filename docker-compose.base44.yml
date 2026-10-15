@@ -1,0 +1,31 @@
+# Base44 sandbox environment for this project.
+#
+# The app is a build-free static site: plain HTML/CSS/JS plus slide images, no
+# package manager, no backend, no database, no external services. So there is a
+# single service that serves the cloned source straight from the bind mount and
+# reloads the browser when a file changes (see .base44/dev-server.mjs).
+services:
+  web:
+    image: node:22
+    working_dir: /app
+    command: ["node", "/app/.base44/dev-server.mjs"]
+    environment:
+      - PORT=3000
+      # Platform flag: 1 in the sandbox preview, unset otherwise. Passed through
+      # for any sandbox-only conditional behaviour; nothing currently needs it.
+      - BASE44_PREVIEW_MODE
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+    restart: on-failure
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:3000/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 10s
